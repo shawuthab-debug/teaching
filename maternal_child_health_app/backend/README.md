@@ -38,3 +38,21 @@ The backend framework, API design, database connection, and hosting server will 
 ## DEVELOPMENT STATUS
 
 This directory contains the initial backend project structure. Backend implementation and technology selection will be completed as the project progresses.
+
+## Setup
+
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+
+## Run
+
+fastapi dev main.py
+API docs: http://127.0.0.1:8000/docs
+
+## Tables
+
+Users, Mothers, Children, Visits, Vaccinations, Appointments, Reminders
+Each table has GET, POST, PUT and DELETE endpoints.
+The first run creates maternal.db, which is not committed.
+Login will be added in a later.
