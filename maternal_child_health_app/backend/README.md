@@ -40,14 +40,15 @@ The backend framework, API design, database connection, and hosting server will 
 This directory contains the initial backend project structure. Backend implementation and technology selection will be completed as the project progresses.
 
 ## Setup
-
+```
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
-
+```
 ## Run
-
+```
 fastapi dev main.py
+```
 API docs: http://127.0.0.1:8000/docs
 
 ## Tables
