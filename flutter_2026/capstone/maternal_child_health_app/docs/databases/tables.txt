@@ -1,71 +1,78 @@
 
 ## Database Tables
 
-### users table (Master Table)
+### user table (Master Table)
 | Field | Type | Description |
 |-------|------|-------------|
-| user_id (PK) | INT | Unique ID |
+| id (PK) | INT | Unique ID |
 | name | VARCHAR | Full name |
 | phone | VARCHAR | Contact number |
 | password | VARCHAR | Hashed password |
 | role | VARCHAR | Mother, Health Worker, or Admin |
 
-### mothers table
-| Field | Type | Description |
-|-------|------|-------------|
-| mother_id (PK) | INT | Unique ID |
-| user_id (FK) | INT | Links to users |
-| date_of_birth | DATE | Date of birth |
-| village | VARCHAR | Home address |
-| date_due | DATE | expected_delivery_date |
-
-### children table
+### mother table
 | Field | Type | Description |
 |-------|------|-------------|
 | id (PK) | INT | Unique ID |
-| mother_id (FK) | INT | Links to mothers |
-| name | VARCHAR | Child's name |
-| date_of_birth | DATE | Date of birth |
-| sex | VARCHAR | Gender |
-|birth_weight | DECIMAL | Child weight after birth
+| user_id (FK) | INT | Links to user |
+| dob | DATE | Date of birth |
+| village | VARCHAR | Home address |
+| due_date | DATE | expected_delivery_date |
+| owner_id (FK) | INT | Links to user |
 
-### antenatal_visits table
+### child table
 | Field | Type | Description |
 |-------|------|-------------|
-| visit_id (PK) | INT | Unique ID |
-| mother_id (FK) | INT | Links to mothers |
-| health_worker_id (FK) | INT | Links to users |
-| child_id (FK) | INT | Links to children |
+| id (PK) | INT | Unique ID |
+| mother_id (FK) | INT | Links to mother |
+| name | VARCHAR | Child's name |
+| dob | DATE | Date of birth |
+| sex | VARCHAR | Gender |
+| birth_weight | DECIMAL | Child weight after birth|
+| owner_id (FK) | INT | Links to user |
+
+### visit table
+| Field | Type | Description |
+|-------|------|-------------|
+| id (PK) | INT | Unique ID |
+| mother_id (FK) | INT | Links to mother |
+| health_worker_id (FK) | INT | Links to user |
+| child_id (FK) | INT | Links to child |
 | visit_date | DATE | Date of visit |
-| blood_pressure | VARCHAR | BP reading |
+| bp | VARCHAR | BP reading |
 | weight | DECIMAL | Weight in kg |
 | notes | TEXT | Observations |
+| owner_id (FK) | INT | Links to user |
 
-### vaccinations table
+### vaccination table
 | Field | Type | Description |
 |-------|------|-------------|
-| vaccinations_id (PK) | INT | Unique ID |
-| child_id (FK) | INT | Links to children |
+| id (PK) | INT | Unique ID |
+| child_id (FK) | INT | Links to child |
 | vaccine | VARCHAR | Vaccine given |
 | date_given | DATE | Date given |
 | date_due | DATE | Next dose date |
+| status | VARCHAR | pending, given and missed |
+| owner_id (FK) | INT | Links to user |
 
 ### reminders table
 | Field | Type | Description |
 |-------|------|-------------|
-| record_id (PK) | INT | Unique ID |
-| user_id (FK) | INT | Links to users |
-| message | VARCHAR | reminders to mothers, healthworkers and admin |
+| id (PK) | INT | Unique ID |
+| user_id (FK) | INT | Links to user |
+| message | VARCHAR | reminders to mother, healthworkers and admin |
 | send_date | DECIMAL | scheduled time before the appointments |
 | sent | BOOLEAN | true or false |
+| owner (FK) | INT | Links to user |
 
 ### appointments table
 | Field | Type | Description |
 |-------|------|-------------|
-| appointment_id (PK) | INT | Unique ID |
+| id (PK) | INT | Unique ID |
 | user_id (FK) | INT | Links to users |
-| appointment_date | DATETIME | Scheduled time |
+| appt_date | DATETIME | Scheduled time |
 | status | VARCHAR | Pending, Attended, Missed |
-| type |VARCHAR | antenatal
+| type |VARCHAR | antenatal|
+| owner (FK) | INT | Links to user |
 PK -PRIMARY KEY
 FK -FOREIGN KEY 
